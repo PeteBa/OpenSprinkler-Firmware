@@ -56,10 +56,18 @@ char tmp_buffer[TMP_BUFFER_SIZE+1];       // scratch buffer
   const char wtopts_filename[] PROGMEM = WEATHER_OPTS_FILENAME;
   const char stns_filename[]   PROGMEM = STATION_ATTR_FILENAME;
   const char ifkey_filename[]  PROGMEM = IFTTT_KEY_FILENAME;
+  const char ifttt_filename[]   PROGMEM = IFTTT_FILENAME;
+  const char webhook_filename[] PROGMEM = INFLUX_FILENAME;
+  const char influx_filename[]  PROGMEM = WEBHOOK_FILENAME;
+  const char name_filename[]    PROGMEM = NAME_FILENAME;
 #else
   const char wtopts_filename[] = WEATHER_OPTS_FILENAME;
   const char stns_filename[]   = STATION_ATTR_FILENAME;
   const char ifkey_filename[]  = IFTTT_KEY_FILENAME;  
+  const char ifttt_filename[]  = IFTTT_FILENAME;
+  const char webhook_filename[] = WEBHOOK_FILENAME;
+  const char influx_filename[] =  INFLUX_FILENAME;
+  const char name_filename[]   =  NAME_FILENAME;
 #endif
 
 #if defined(ARDUINO)
@@ -1276,6 +1284,11 @@ void OpenSprinkler::options_setup() {
 
     // 5. delete sd file
     remove_file(wtopts_filename);
+    remove_file(name_filename);
+    remove_file(ifkey_filename);
+    remove_file(ifttt_filename);
+    remove_file(influx_filename);
+    remove_file(webhook_filename);
 
     // 6. write options
     options_save(); // write default option values
