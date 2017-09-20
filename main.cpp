@@ -245,8 +245,10 @@ void do_setup() {
   WDTCSR |= _BV(WDIE);
 
   if (os.start_network()) {  // initialize network
+    DEBUG_PRINTLN("network established.");
     os.status.network_fails = 0;
   } else {
+    DEBUG_PRINTLN("network failed.");
     os.status.network_fails = 1;
   }
   os.status.req_network = 0;
@@ -268,6 +270,8 @@ ISR(WDT_vect)
   // this isr is called every 8 seconds
   if (wdt_timeout > 15) {
     // reset after 120 seconds of timeout
+    DEBUG_PRINTLN("WDT Triggered");
+    delay(2000);
     sysReset();
   }
 }
